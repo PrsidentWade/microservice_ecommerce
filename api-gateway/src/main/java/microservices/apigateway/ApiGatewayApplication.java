@@ -18,7 +18,7 @@ public class ApiGatewayApplication {
         return builder.routes()
                 .route("r1", p -> p.path("/product/**")
                         .filters(f -> f.stripPrefix(1))
-                        .uri("http://localhost:8080"))
+                        .uri("http://localhost:8086"))
 
                 .route("r2", p -> p.path("/orders/**")
                         .filters(f -> f.stripPrefix(1))

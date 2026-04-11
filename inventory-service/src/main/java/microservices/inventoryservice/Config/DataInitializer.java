@@ -15,16 +15,20 @@ public class DataInitializer {
     @PostConstruct
     public void init() {
 
-        Inventory product1 = new Inventory();
-        product1.setSkuCode("MACBOOK-PRO-14");
-        product1.setQuantity(10);
 
-        Inventory product2 = new Inventory();
-        product2.setSkuCode("IPHONE-15");
-        product2.setQuantity(5);
+        if (inventoryRepository.findBySkuCode("MACBOOK-PRO-14").isEmpty()) {
+            Inventory product1 = new Inventory();
+            product1.setSkuCode("MACBOOK-PRO-14");
+            product1.setQuantity(100);
+            inventoryRepository.save(product1);
+        }
 
-        inventoryRepository.save(product1);
-        inventoryRepository.save(product2);
+        if (inventoryRepository.findBySkuCode("IPHONE-15").isEmpty()) {
+            Inventory product2 = new Inventory();
+            product2.setSkuCode("IPHONE-15");
+            product2.setQuantity(5);
+            inventoryRepository.save(product2);
+        }
 
         System.out.println("✅ Données Inventory ajoutées !");
     }

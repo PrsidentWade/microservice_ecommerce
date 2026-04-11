@@ -12,13 +12,12 @@ import java.util.List;
 public class InventoryService {
     private final InventoryRepository inventoryRepository;
 
+
+
     public boolean isInStock(String skuCode, Integer quantity) {
-        List<Inventory> inventories = inventoryRepository.findBySkuCode(skuCode);
+        Inventory inventory = inventoryRepository.findBySkuCode(skuCode)
+                .orElseThrow(() -> new RuntimeException("Produit non trouvé"));
 
-        int totalQuantity = inventories.stream()
-                .mapToInt(Inventory::getQuantity)
-                .sum();
-
-        return totalQuantity >= quantity;
+        return inventory.getQuantity() >= quantity;
     }
 }
